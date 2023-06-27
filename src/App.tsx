@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import {useEffect, useState} from "react";
+import {useWindowSize} from "./useWindowSize.ts";
 
 function App() {
-  const [count, setCount] = useState(0)
+	const [size] = useWindowSize()
+	const [count, setCount] = useState(0)
+	const [total,setTotal] = useState(0)
+	useEffect(() => {
+		document.title = "React后台课程"
+	})
+	useEffect(() => {
+		setCount(count => count + 1)
+	}, [])
 
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+	useEffect(() => {
+		setTotal(count * 5)
+	},[count])
+
+	useEffect(() => {
+		// 使用定时器，一定要有手动关闭
+		const timer = setInterval(() => {
+			setCount(count => count + 1)
+		}, 1000)
+		return () => {
+			clearInterval(timer)
+		}
+	})
+
+
+
+	return (
+		<div>
+			<p>欢迎学习React后台课程</p>
+			<p>Count: {count}, Total:{total}</p>
+			<p>
+				window width: {size.width} px, height: {size.height} px
+			</p>
+		</div>
+	)
 }
 
 export default App
