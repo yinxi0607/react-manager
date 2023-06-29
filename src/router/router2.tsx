@@ -1,4 +1,4 @@
-import {createBrowserRouter, Outlet, redirect, useLoaderData, useParams} from "react-router-dom";
+import {createBrowserRouter, Form, Outlet, redirect, useActionData, useLoaderData, useParams} from "react-router-dom";
 import App from "../App.tsx";
 
 function NotFound(){
@@ -42,6 +42,46 @@ function orderLoader({params}: any){
   // }
 }
 
+function Login(){
+  const errors: any = useActionData()
+  return (
+    <Form method='post'>
+      <p>
+        <input type='text' name='email' />
+        {errors?.email && <span>{errors.email}</span>}
+      </p>
+      <p>
+        <input type='password' name='password' />
+        {errors?.password && <span>{errors.password}</span>}
+      </p>
+      <p>
+        <button type='submit'>登录</button>
+      </p>
+    </Form>
+  )
+}
+
+async function loginAction({request}:any){
+  const formData = await request.formData()
+  const email = formData.get("email")
+  const password = formData.get("password")
+  const errors:any = {
+
+  }
+  if (typeof email!=='string' || !email.includes('@')) {
+    errors.email = "That doesn't look like an email address"
+  }
+  if (typeof password!=='string' || password.length<6) {
+    errors.password = "Password must be > 6 characters"
+  }
+
+  if (Object.keys(errors).length>0) {
+    return errors
+  }
+  console.log("创建用户成功")
+  return redirect('/')
+}
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -51,6 +91,11 @@ const router = createBrowserRouter([
     path: '/order/:id',
     element: <Order />,
     loader: orderLoader
+  },
+  {
+    path: '/login',
+    element: <Login />,
+    action: loginAction
   },
   {
     path: 'goods/:goodsId/order/:orderId',
