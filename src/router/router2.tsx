@@ -95,7 +95,7 @@ const router = createBrowserRouter([
   {
     path: '/login',
     element: <Login />,
-    action: loginAction
+    action: await loginAction
   },
   {
     path: 'goods/:goodsId/order/:orderId',
