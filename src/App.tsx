@@ -4,11 +4,11 @@ import {useState, useTransition} from "react";
 function App() {
   const [query, setQuery] = useState('')
   const [list, setList] = useState<any>([])
-  const [isPendding, startTransition] = useTransition()
+  const [isPending, startTransition] = useTransition()
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value)
     startTransition(() => {
-        const arr: unknown[] = Array.from({length: 10}).fill(1);
+        const arr: any[] = Array.from({length: 10}).fill(1);
         setList([...list, ...arr])
       }
     )
@@ -20,7 +20,7 @@ function App() {
       </div>
       <div>
         {
-          isPendding?<div>loading...</div>:list.map((index: number) => {
+          isPending?<div>loading...</div>:list.map((index: number) => {
               return <p key={index}>{query}</p>
             })
         }
