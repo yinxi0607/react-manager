@@ -1,0 +1,34 @@
+import {createBrowserRouter, Navigate} from "react-router-dom";
+import Login from '@/views/Login.tsx'
+import Welcome from '@/views/Welcome.tsx'
+import NotFound from '@/views/404.tsx'
+import NoPermission from '@/views/403.tsx'
+
+const router = [
+  {
+    path: "/",
+    element: <Welcome/>
+  },
+  {
+    path: "/login",
+    element: <Login/>
+  },
+  {
+    path: "/*",
+    element: <Navigate to='/404'/>
+  },
+  {
+    path: "/404",
+    element: <NotFound/>
+  },
+  {
+    path: "/403",
+    element: <NoPermission/>
+  }
+]
+
+// export default function Router(){
+//   return useRoutes(router)
+// }
+
+export default createBrowserRouter(router)
