@@ -10,6 +10,10 @@ const router = [
     element: <Welcome/>
   },
   {
+    path: "/welcome",
+    element: <Welcome/>
+  },
+  {
     path: "/login",
     element: <Login/>
   },
