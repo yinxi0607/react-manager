@@ -1,11 +1,13 @@
 import request from "@/utils/request.ts";
 import {Button, Spin} from "antd";
 import storage from "@/utils/storage.ts";
-import {formatMoney} from "@/utils";
+import {formateDate, formatMoney, toLocalDate} from "@/utils";
 
 export default function Welcome() {
   const handleClick = () => {
     console.log(formatMoney("2324321314"))
+    console.log(toLocalDate(new Date()))
+    console.log(formateDate(new Date()))
     request.post('/user/login', {})
   }
   const handleStorage = (type: number) => {
