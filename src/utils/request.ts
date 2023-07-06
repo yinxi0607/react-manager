@@ -2,6 +2,7 @@ import axios from "axios";
 import {message} from "antd";
 import {hideLoading, showLoading} from "@/utils/loading/index..tsx";
 import storage from "@/utils/storage.ts";
+import env from "@/config/index.ts";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL as string,
@@ -18,10 +19,10 @@ instance.interceptors.request.use(
     if (token) {
       config.headers.Authorization = 'Token::' + token
     }
-    if(import.meta.env.VITE_MOCK=="true"){
-      config.baseURL = import.meta.env.VITE_MOCK_API
+    if(env.mock){
+      config.baseURL = env.mockApi
     }else{
-      config.baseURL = import.meta.env.VITE_BASE_API
+      config.baseURL = env.baseApi
     }
     return {...config}
   },
