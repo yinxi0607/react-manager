@@ -1,9 +1,11 @@
 import request from "@/utils/request.ts";
 import {Button, Spin} from "antd";
 import storage from "@/utils/storage.ts";
+import {formatMoney} from "@/utils";
 
 export default function Welcome() {
   const handleClick = () => {
+    console.log(formatMoney("2324321314"))
     request.post('/user/login', {})
   }
   const handleStorage = (type: number) => {
