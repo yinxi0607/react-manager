@@ -4,7 +4,7 @@ import storage from "@/utils/storage.ts";
 
 export default function Welcome() {
   const handleClick = () => {
-    request.post('/users/login', {})
+    request.post('/user/login', {})
   }
   const handleStorage = (type: number) => {
     if (type === 1) {
