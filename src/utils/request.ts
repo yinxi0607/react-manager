@@ -3,6 +3,7 @@ import {message} from "antd";
 import {hideLoading, showLoading} from "@/utils/loading/index..tsx";
 import storage from "@/utils/storage.ts";
 import env from "@/config/index.ts";
+import {ResponseData} from "@/types/api.ts";
 
 const instance = axios.create({
   baseURL: import.meta.env.VITE_BASE_URL as string,
@@ -33,13 +34,13 @@ instance.interceptors.request.use(
 
 // 响应拦截器
 instance.interceptors.response.use(response => {
-  const data = response.data
+  const data:ResponseData = response.data
   hideLoading()
   if (data.code === 500001) {
     message.error(data.msg)
-    localStorage.removeItem('token')
+    storage.remove('token')
     // location.href = '/login'
-  } else if (data.code === 0) {
+  } else if (data.code !== 0) {
     message.error(data.msg)
     return Promise.reject(data)
   }

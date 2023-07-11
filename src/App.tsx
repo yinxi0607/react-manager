@@ -3,6 +3,7 @@ import {RouterProvider} from 'react-router'
 // import Router from "./router";
 import router from "./router"
 // import {BrowserRouter} from "react-router-dom";
+import {ConfigProvider} from "antd";
 
 function App() {
   // return (
@@ -10,7 +11,20 @@ function App() {
   //     <Router/>
   //   </BrowserRouter>
   // )
-  return <RouterProvider router={router}/>
+  return (
+    <ConfigProvider
+      theme={
+      {
+        token: {
+          colorPrimary: '#ed6c00',
+        }
+      }
+      }
+    >
+      <RouterProvider router={router}/>
+    </ConfigProvider>
+  )
+
 }
 
 export default App

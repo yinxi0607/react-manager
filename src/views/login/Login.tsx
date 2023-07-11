@@ -1,10 +1,22 @@
 import './index.less'
-import {Form,Button,Input} from "antd";
+import {Form, Button, Input, message} from "antd";
 // import './index.less'
 import styles from './index.module.less'
-export default function Login() {
-  const onFinish = (values: any) => {
-    console.log('Success:', values)
+import api from '@/api'
+import {Login} from '@/types/api'
+import storage from '@/utils/storage'
+export default function LoginFC() {
+  const onFinish = async (values: Login.params) => {
+    try{
+      const data = await api.login(values)
+      storage.set("token",data)
+      message.success("登录成功")
+      console.log('data',data)
+    }catch (error){
+      console.log('error',error)
+      message.error("登录失败")
+    }
+
   }
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo)
@@ -24,14 +36,14 @@ export default function Login() {
           autoComplete="off"
         >
           <Form.Item
-            name="username"
+            name="userName"
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
             <Input />
           </Form.Item>
 
           <Form.Item
-            name="password"
+            name='userPwd'
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
             <Input.Password />
