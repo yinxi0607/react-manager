@@ -1,5 +1,7 @@
 import './index.less'
 import {Form,Button,Input} from "antd";
+// import './index.less'
+import styles from './index.module.less'
 export default function Login() {
   const onFinish = (values: any) => {
     console.log('Success:', values)
@@ -8,9 +10,9 @@ export default function Login() {
     console.log('Failed:', errorInfo)
   }
   return (
-    <div className='login'>
-      <div className='login-wrapper'>
-        <div className='title'>系统登录</div>
+    <div className={styles.login}>
+      <div className={styles.loginWrapper}>
+        <div className={styles.title}>系统登录</div>
         <Form
           name="basic"
           // labelCol={{ span: 8 }}
