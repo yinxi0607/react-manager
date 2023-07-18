@@ -3,7 +3,7 @@ import {RouterProvider} from 'react-router'
 // import Router from "./router";
 import router from "./router"
 // import {BrowserRouter} from "react-router-dom";
-import {ConfigProvider} from "antd";
+import {ConfigProvider,App as AntdApp} from "antd";
 
 function App() {
   // return (
@@ -21,7 +21,10 @@ function App() {
       }
       }
     >
-      <RouterProvider router={router}/>
+      <AntdApp>
+        <RouterProvider router={router}/>
+      </AntdApp>
+
     </ConfigProvider>
   )
 

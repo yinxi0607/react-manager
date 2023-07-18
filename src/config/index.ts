@@ -14,7 +14,7 @@ if (location.host.indexOf('localhost:5173')>-1){
 const config = {
   dev: {
     baseApi: '/api',
-    mockApi: 'https://www.fastmock.site/mock/5408b1c9a0d6415307812ae1eaf0063c/api',
+    mockApi: 'http://localhost:58888',
     uploadApi: 'http://localhost:58888',
     mock: true,
     cdn: 'https://cdn.aliyun.com'

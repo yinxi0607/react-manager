@@ -1,17 +1,27 @@
 import './index.less'
-import {Form, Button, Input, message} from "antd";
+import {Form, Button, Input,message} from "antd";
 // import './index.less'
 import styles from './index.module.less'
 import api from '@/api'
 import {Login} from '@/types/api'
 import storage from '@/utils/storage'
+import {useState} from "react";
 export default function LoginFC() {
+  // const {message} = App.useApp()
+  const [loading,setLoading] = useState(false)
   const onFinish = async (values: Login.params) => {
     try{
-      const data = await api.login(values)
+      setLoading(true)
+      const data:any = await api.login(values)
+      setLoading(false)
+      if (data.code!=0){
+        return message.error(data.msg)
+      }
       storage.set("token",data)
       message.success("登录成功")
       console.log('data',data)
+      const params = new URLSearchParams(location.search)
+      location.href = params.get("callback")||"/welcome"
     }catch (error){
       console.log('error',error)
       message.error("登录失败")
@@ -50,7 +60,7 @@ export default function LoginFC() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" block htmlType="submit">
+            <Button type="primary" block htmlType="submit" loading={loading}>
               登录
             </Button>
           </Form.Item>
