@@ -1,6 +1,8 @@
 import React, {useEffect} from 'react';
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import {Layout, Menu, theme, Watermark} from 'antd';
+import {Layout, theme, Watermark} from 'antd';
+import NavHeader from "@/components/NavHeader";
+import NavFooter from "@/components/NavFooter";
+import SideMenu from "@/components/Menu";
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -55,21 +57,12 @@ const App: React.FC = () => {
         }}
       >
         <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={['4']}
-          items={[UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-            (icon, index) => ({
-              key: String(index + 1),
-              icon: React.createElement(icon),
-              label: `nav ${index + 1}`,
-            }),
-          )}
-        />
+        <SideMenu/>
       </Sider>
       <Layout>
-        <Header style={{ padding: 0, background: colorBgContainer }} />
+        <Header style={{ padding: 0, background: colorBgContainer }}>
+          <NavHeader/>
+        </Header>
         <Content style={{ margin: '24px 16px 0' }}>
           <div style={{ padding: 24, minHeight: 360, background: colorBgContainer }} id="content">
             <span>
@@ -77,7 +70,9 @@ const App: React.FC = () => {
             </span>
           </div>
         </Content>
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center' }}>
+          <NavFooter/>
+        </Footer>
       </Layout>
     </Layout>
     </Watermark>
