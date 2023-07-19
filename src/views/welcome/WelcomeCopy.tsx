@@ -5,7 +5,7 @@ import {formateDate, formatMoney, toLocalDate} from "@/utils";
 import {useState} from "react";
 import styles from "./index.module.less"
 
-export default function Welcome() {
+export default function WelcomeCopy() {
   const [data, setData] = useState<string[]>([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -23,7 +23,7 @@ export default function Welcome() {
 
       if (reader) {
         const textDecoder = new TextDecoder();
-        reader.read().then(async function processText({ done, value }): Promise<void> {
+        reader.read().then(async function processText({done, value}): Promise<void> {
           if (done) {
             setIsLoading(false);
             return;
@@ -68,7 +68,7 @@ export default function Welcome() {
               {item}
             </div>
           ))}
-          {isLoading && <li className={styles.cursor} />}
+          {isLoading && <li className={styles.cursor}/>}
         </ul>
       </div>
 
